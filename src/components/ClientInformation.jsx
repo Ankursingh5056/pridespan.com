@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { supabase } from '../../lib/supabase' 
 
 const ClientInformation = ({ isOpen, onClose, serviceName }) => {
   const [formData, setFormData] = useState({
@@ -11,6 +12,8 @@ const ClientInformation = ({ isOpen, onClose, serviceName }) => {
     message: ''
   })
   const [showThankYou, setShowThankYou] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -20,43 +23,53 @@ const ClientInformation = ({ isOpen, onClose, serviceName }) => {
     }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    
-    // Create service inquiry submission object
-    const serviceSubmission = {
-      id: Date.now(), // Unique ID for the submission
-      ...formData,
-      timestamp: new Date().toISOString(),
-      status: 'unread'
+    setLoading(true)
+    setError('')
+
+    try {
+      // Insert into Supabase
+      const { data, error: insertError } = await supabase
+        .from('service_inquiries')
+        .insert({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          service: formData.service,
+          budget: formData.budget,
+          timeline: formData.timeline,
+          message: formData.message
+        })
+
+      if (insertError) {
+        setError(insertError.message)
+        console.error('Error inserting data:', insertError)
+        return
+      }
+
+      // Log success
+      console.log('Service Inquiry submitted successfully:', data)
+
+      // Show thank you popup
+      setShowThankYou(true)
+
+      // Reset form
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        service: serviceName || '',
+        budget: '',
+        timeline: '',
+        message: ''
+      })
+    } catch (err) {
+      setError('An unexpected error occurred')
+      console.error('Error:', err)
+    } finally {
+      setLoading(false)
     }
-    
-    // Get existing service submissions from localStorage
-    const existingSubmissions = JSON.parse(localStorage.getItem('serviceSubmissions') || '[]')
-    
-    // Add new submission to the array
-    const updatedSubmissions = [...existingSubmissions, serviceSubmission]
-    
-    // Save back to localStorage
-    localStorage.setItem('serviceSubmissions', JSON.stringify(updatedSubmissions))
-    
-    // Log the submission (for debugging)
-    console.log('Service Inquiry Data:', serviceSubmission)
-    console.log('All Service Submissions:', updatedSubmissions)
-    
-    // Show thank you popup
-    setShowThankYou(true)
-    
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      service: serviceName || '',
-      budget: '',
-      timeline: '',
-      message: ''
-    })
   }
 
   const handleCloseThankYou = () => {
@@ -88,6 +101,13 @@ const ClientInformation = ({ isOpen, onClose, serviceName }) => {
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="p-6 space-y-6">
+            {/* Error Message */}
+            {error && (
+              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
+                {error}
+              </div>
+            )}
+
             <div className="grid md:grid-cols-2 gap-6">
               {/* Name */}
               <div>
@@ -101,7 +121,8 @@ const ClientInformation = ({ isOpen, onClose, serviceName }) => {
                   value={formData.name}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                  disabled={loading}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 disabled:bg-gray-100 disabled:cursor-not-allowed"
                   placeholder="Enter your full name"
                 />
               </div>
@@ -118,7 +139,8 @@ const ClientInformation = ({ isOpen, onClose, serviceName }) => {
                   value={formData.email}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                  disabled={loading}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 disabled:bg-gray-100 disabled:cursor-not-allowed"
                   placeholder="Enter your email address"
                 />
               </div>
@@ -135,7 +157,8 @@ const ClientInformation = ({ isOpen, onClose, serviceName }) => {
                   value={formData.phone}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                  disabled={loading}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 disabled:bg-gray-100 disabled:cursor-not-allowed"
                   placeholder="Enter your phone number"
                 />
               </div>
@@ -151,7 +174,8 @@ const ClientInformation = ({ isOpen, onClose, serviceName }) => {
                   name="service"
                   value={formData.service}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50"
+                  disabled={true}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 disabled:cursor-not-allowed"
                   placeholder="Service type"
                   readOnly
                 />
@@ -167,14 +191,15 @@ const ClientInformation = ({ isOpen, onClose, serviceName }) => {
                   name="budget"
                   value={formData.budget}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                  disabled={loading}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 disabled:bg-gray-100 disabled:cursor-not-allowed"
                 >
                   <option value="">Select budget range</option>
-                  <option value="Under $5,000">Under $5,000</option>
-                  <option value="$5,000 - $10,000">$5,000 - $10,000</option>
-                  <option value="$10,000 - $25,000">$10,000 - $25,000</option>
-                  <option value="$25,000 - $50,000">$25,000 - $50,000</option>
-                  <option value="Over $50,000">Over $50,000</option>
+                  <option value="Under ₹50,000">Under ₹50,000</option>
+                  <option value="₹50,000 - ₹1,00,000">₹50,000 - ₹1,00,000</option>
+                  <option value="₹1,00,000 - ₹2,50,000">₹1,00,000 - ₹2,50,000</option>
+                  <option value="₹2,50,000 - ₹5,00,000">₹2,50,000 - ₹5,00,000</option>
+                  <option value="Over ₹5,00,000">Over ₹5,00,000</option>
                 </select>
               </div>
 
@@ -188,7 +213,8 @@ const ClientInformation = ({ isOpen, onClose, serviceName }) => {
                   name="timeline"
                   value={formData.timeline}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                  disabled={loading}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 disabled:bg-gray-100 disabled:cursor-not-allowed"
                 >
                   <option value="">Select timeline</option>
                   <option value="Immediately">Immediately</option>
@@ -211,8 +237,9 @@ const ClientInformation = ({ isOpen, onClose, serviceName }) => {
                 value={formData.message}
                 onChange={handleInputChange}
                 required
+                disabled={loading}
                 rows={4}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none disabled:bg-gray-100 disabled:cursor-not-allowed"
                 placeholder="Tell us about your project requirements, preferences, and any specific details..."
               />
             </div>
@@ -222,15 +249,17 @@ const ClientInformation = ({ isOpen, onClose, serviceName }) => {
               <button
                 type="button"
                 onClick={onClose}
-                className="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-all duration-200 font-medium"
+                disabled={loading}
+                className="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-all duration-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-200 font-medium shadow-lg hover:shadow-xl transform hover:scale-105"
+                disabled={loading}
+                className="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-200 font-medium shadow-lg hover:shadow-xl transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
               >
-                Send Message
+                {loading ? 'Sending...' : 'Send Message'}
               </button>
             </div>
           </form>
@@ -246,15 +275,15 @@ const ClientInformation = ({ isOpen, onClose, serviceName }) => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            
+
             <h3 className="text-2xl font-bold text-gray-900 mb-4">
               Thank You for Choosing Us!
             </h3>
-            
+
             <p className="text-gray-600 mb-6 leading-relaxed">
               Our team will contact you soon to discuss your project requirements and provide you with a personalized consultation.
             </p>
-            
+
             <button
               onClick={handleCloseThankYou}
               className="w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-200 font-medium"

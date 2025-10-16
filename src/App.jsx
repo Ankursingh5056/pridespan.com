@@ -7,6 +7,7 @@ import About from './components/About'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import Admin from './components/Admin'
+import WhatsAppButton from './components/WhatsAppButton'
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -22,6 +23,7 @@ function App() {
       <Contact />
       <Footer onAdminClick={() => setIsAdminOpen(true)} />
       <Admin isOpen={isAdminOpen} onClose={() => setIsAdminOpen(false)} />
+      <WhatsAppButton />
     </div>
   )
 }

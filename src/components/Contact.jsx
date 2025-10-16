@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { supabase } from '../../lib/supabase'
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -19,42 +20,47 @@ const Contact = () => {
     }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    
-    // Create contact submission object
-    const contactSubmission = {
-      id: Date.now(), // Unique ID for the submission
-      ...formData,
-      timestamp: new Date().toISOString(),
-      status: 'unread'
+
+    try {
+      // Insert into Supabase
+      const { data, error: insertError } = await supabase
+        .from('contact_submissions')
+        .insert({
+          first_name: formData.firstName,
+          last_name: formData.lastName,
+          email: formData.email,
+          phone: formData.phone,
+          project_type: formData.projectType,
+          message: formData.message
+        })
+
+      if (insertError) {
+        console.error('Error inserting contact submission:', insertError)
+        alert('There was an error submitting your message. Please try again.')
+        return
+      }
+
+      // Log success
+      console.log('Contact submission successful:', data)
+
+      // Show thank you popup
+      setShowThankYou(true)
+
+      // Reset form
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        projectType: '',
+        message: ''
+      })
+    } catch (err) {
+      console.error('Error:', err)
+      alert('There was an error submitting your message. Please try again.')
     }
-    
-    // Get existing contact submissions from localStorage
-    const existingSubmissions = JSON.parse(localStorage.getItem('contactSubmissions') || '[]')
-    
-    // Add new submission to the array
-    const updatedSubmissions = [...existingSubmissions, contactSubmission]
-    
-    // Save back to localStorage
-    localStorage.setItem('contactSubmissions', JSON.stringify(updatedSubmissions))
-    
-    // Log the submission (for debugging)
-    console.log('Contact Form Data:', contactSubmission)
-    console.log('All Contact Submissions:', updatedSubmissions)
-    
-    // Show thank you popup
-    setShowThankYou(true)
-    
-    // Reset form
-    setFormData({
-      firstName: '',
-      lastName: '',
-      email: '',
-      phone: '',
-      projectType: '',
-      message: ''
-    })
   }
 
   const handleCloseThankYou = () => {
