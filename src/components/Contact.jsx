@@ -41,14 +41,8 @@ const Contact = () => {
         alert('There was an error submitting your message. Please try again.')
         return
       }
-
-      // Log success
       console.log('Contact submission successful:', data)
-
-      // Show thank you popup
       setShowThankYou(true)
-
-      // Reset form
       setFormData({
         firstName: '',
         lastName: '',
@@ -98,7 +92,7 @@ const Contact = () => {
                       onChange={handleInputChange}
                       required
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                      placeholder="John"
+                      placeholder="Jagriti"
                     />
                   </div>
                   <div>
@@ -113,7 +107,7 @@ const Contact = () => {
                       onChange={handleInputChange}
                       required
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                      placeholder="Doe"
+                      placeholder="Singh"
                     />
                   </div>
                 </div>
@@ -130,7 +124,7 @@ const Contact = () => {
                     onChange={handleInputChange}
                     required
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                    placeholder="john@example.com"
+                    placeholder="rmcnsltncy@gmail.com"
                   />
                 </div>
                 
@@ -146,7 +140,7 @@ const Contact = () => {
                     onChange={handleInputChange}
                     required
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                    placeholder="+1 (555) 123-4567"
+                    placeholder="(+91) 95400-977 75"
                   />
                 </div>
                 
@@ -212,7 +206,7 @@ const Contact = () => {
                     </div>
                     <div>
                       <h4 className="text-lg font-medium text-gray-900">Address</h4>
-                      <p className="text-gray-600">123 Design Street<br />Creative District, CD 12345</p>
+                      <p className="text-gray-600">822,Tower B4 ,Spazeltech<br />Park,Sec49,Gurgaon</p>
                     </div>
                   </div>
                   
@@ -226,7 +220,7 @@ const Contact = () => {
                     </div>
                     <div>
                       <h4 className="text-lg font-medium text-gray-900">Phone</h4>
-                      <p className="text-gray-600">+1 (555) 123-4567</p>
+                      <p className="text-gray-600">(+91) 95400-977 75</p>
                     </div>
                   </div>
                   
@@ -240,7 +234,7 @@ const Contact = () => {
                     </div>
                     <div>
                       <h4 className="text-lg font-medium text-gray-900">Email</h4>
-                      <p className="text-gray-600">hello@pridespan.com</p>
+                      <p className="text-gray-600">rmcnsltncy@gmail.com</p>
                     </div>
                   </div>
                 </div>
