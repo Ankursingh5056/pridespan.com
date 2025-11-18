@@ -136,7 +136,7 @@ const ClientInformation = ({ isOpen, onClose, serviceName }) => {
                   type="email"
                   id="email"
                   name="email"
-                  value={formData.email}
+                  value={formData.email}  
                   onChange={handleInputChange}
                   required
                   disabled={loading}
