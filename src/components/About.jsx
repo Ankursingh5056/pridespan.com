@@ -21,10 +21,10 @@ const teamMembers = [
     description: "Specialist in modern and contemporary design."
   },
   {
-    name: "Emily Rodriguez",
+    name: "A.k arora",
     role: "Lighting Specialist",
     image:
-      "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=500&q=80",
+      "/A.R.arora.jpeg", 
     description: "Creates ambient and functional lighting solutions."
   }
 ];
