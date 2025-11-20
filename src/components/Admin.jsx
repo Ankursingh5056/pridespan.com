@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { supabase } from '../../lib/supabase'
 
-const Admin = ({ isOpen, onClose }) => {
+const Admin = ({ isOpen, onClose, isPage = false }) => {
   const [activeTab, setActiveTab] = useState('dashboard')
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -419,11 +419,11 @@ const Admin = ({ isOpen, onClose }) => {
     { title: 'Unread Submissions', value: (contactSubmissions.filter(c => c.status === 'unread').length + serviceSubmissions.filter(s => s.status === 'unread').length).toString(), change: '-2%', icon: '📋' }
   ]
 
-  if (!isOpen) return null
+  if (!isOpen && !isPage) return null
 
-  return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-6xl h-[90vh] overflow-hidden">
+  const content = (
+    <div className={`${isPage ? 'min-h-screen bg-gray-50' : 'fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4'}`}>
+      <div className={`${isPage ? '' : 'bg-white rounded-2xl shadow-2xl w-full max-w-6xl h-[90vh] overflow-hidden'}`}>
         {/* Header */}
         <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6">
           <div className="flex justify-between items-center">

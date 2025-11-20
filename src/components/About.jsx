@@ -1,12 +1,6 @@
 // src/components/About.jsx
 import React, { useEffect, useState } from "react";
-import { motion,useAnimation } from "framer-motion";
-
-/* ----------------------------------------------------------
-   DATA
----------------------------------------------------------- */
-
-// Stable team images (fallback applied if needed)
+import {motion,useAnimation } from "framer-motion";
 const teamMembers = [
   {
     name: "Mandeep Kaur",
@@ -139,11 +133,6 @@ const SliderCard = ({ images }) => {
     </div>
   );
 };
-
-/* ----------------------------------------------------------
-   MAIN COMPONENT
----------------------------------------------------------- */
-
 const About = () => {
   const controls = useAnimation();
 
