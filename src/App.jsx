@@ -46,7 +46,7 @@ function App() {
         {isAdminOpen && (
   <Admin
     isOpen={true}
-    isPage={false}   // 🔥 force modal mode
+    isPage={false}   
     onClose={() => setIsAdminOpen(false)}
   />
 )}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { supabase } from '../../lib/supabase'
 
-const Admin = ({ isOpen, onClose, isPage = true }) => {
+const Admin = ({ isOpen, onClose }) => {
   const [activeTab, setActiveTab] = useState('dashboard')
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -9,7 +9,7 @@ const Admin = ({ isOpen, onClose, isPage = true }) => {
   const [loginCredentials, setLoginCredentials] = useState({ email: '', password: '' })
   const [loginError, setLoginError] = useState('')
   const [loginLoading, setLoginLoading] = useState(false)
-
+  
   // Project Management State
   const [projects, setProjects] = useState([])
   const [showAddProject, setShowAddProject] = useState(false)
@@ -17,10 +17,10 @@ const Admin = ({ isOpen, onClose, isPage = true }) => {
   const [newProject, setNewProject] = useState({
     name: '', client: '', status: 'Planning', progress: 0, budget: '', startDate: '', endDate: ''
   })
-
+  
   // Contact Form Submissions State
   const [contactSubmissions, setContactSubmissions] = useState([])
-
+  
   // Service Form Submissions State
   const [serviceSubmissions, setServiceSubmissions] = useState([])
 
@@ -29,7 +29,7 @@ const Admin = ({ isOpen, onClose, isPage = true }) => {
     const checkSession = async () => {
       try {
         const { data: { session } } = await supabase.auth.getSession()
-
+        
         if (session) {
           setIsLoggedIn(true)
           setAdminUser(session.user)
@@ -107,7 +107,7 @@ const Admin = ({ isOpen, onClose, isPage = true }) => {
       setIsLoggedIn(true)
       setAdminUser(authData.user)
       setLoginCredentials({ email: '', password: '' })
-
+      
       // Load dashboard data
       loadDashboardData()
     } catch (error) {
@@ -122,7 +122,7 @@ const Admin = ({ isOpen, onClose, isPage = true }) => {
     try {
       // Get session to verify user is authenticated
       const { data: { session } } = await supabase.auth.getSession()
-
+      
       if (!session) {
         setIsLoggedIn(false)
         return
@@ -344,7 +344,7 @@ const Admin = ({ isOpen, onClose, isPage = true }) => {
     const date = new Date(timestamp)
     const now = new Date()
     const diffInHours = Math.floor((now - date) / (1000 * 60 * 60))
-
+    
     if (diffInHours < 1) return 'Just now'
     if (diffInHours < 24) return `${diffInHours} hours ago`
     const diffInDays = Math.floor(diffInHours / 24)
@@ -402,45 +402,31 @@ const Admin = ({ isOpen, onClose, isPage = true }) => {
   const stats = [
     { title: 'Total Projects', value: projects.length.toString(), change: '+12%', icon: '📊' },
     { title: 'Active Clients', value: new Set(projects.map(p => p.client)).size.toString(), change: '+8%', icon: '👥' },
-    {
-      title: 'Completed Revenue', value: `₹${(projects.filter(p => p.status === 'Completed').reduce((sum, p) => {
-        const budgetStr = p.budget?.toString() || '0'
-        const cleanBudget = budgetStr.replace(/[₹$,\s]/g, '')
-        const budgetNum = parseFloat(cleanBudget) || 0
-        return sum + budgetNum
-      }, 0) / 1000).toFixed(1)}K`, change: '+15%', icon: '💰'
-    },
-    {
-      title: 'Total Revenue', value: `₹${(projects.reduce((sum, p) => {
-        const budgetStr = p.budget?.toString() || '0'
-        const cleanBudget = budgetStr.replace(/[₹$,\s]/g, '')
-        const budgetNum = parseFloat(cleanBudget) || 0
-        return sum + budgetNum
-      }, 0) / 1000).toFixed(1)}K`, change: '+15%', icon: '💰'
-    },
+    { title: 'Completed Revenue', value: `₹${(projects.filter(p => p.status === 'Completed').reduce((sum, p) => {
+      const budgetStr = p.budget?.toString() || '0'
+      const cleanBudget = budgetStr.replace(/[₹$,\s]/g, '')
+      const budgetNum = parseFloat(cleanBudget) || 0
+      return sum + budgetNum
+    }, 0) / 1000).toFixed(1)}K`, change: '+15%', icon: '💰' },
+    { title: 'Total Revenue', value: `₹${(projects.reduce((sum, p) => {
+      const budgetStr = p.budget?.toString() || '0'
+      const cleanBudget = budgetStr.replace(/[₹$,\s]/g, '')
+      const budgetNum = parseFloat(cleanBudget) || 0
+      return sum + budgetNum
+    }, 0) / 1000).toFixed(1)}K`, change: '+15%', icon: '💰' },
     { title: 'Contact Submissions', value: contactSubmissions.length.toString(), change: '+3%', icon: '📧' },
     { title: 'Service Inquiries', value: serviceSubmissions.length.toString(), change: '+5%', icon: '🏠' },
     { title: 'Unread Submissions', value: (contactSubmissions.filter(c => c.status === 'unread').length + serviceSubmissions.filter(s => s.status === 'unread').length).toString(), change: '-2%', icon: '📋' }
   ]
 
-  if (!isOpen && !isPage) return null
+  if (!isOpen) return null
+
   return (
     <div
-  className={`${
-    isPage
-      ? "min-h-screen bg-gray-50"
-      : "fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center "
-  }`}
->
-  <div
-    className={`${
-      isPage
-        ? "max-w-4xl mx-auto bg-white  rounded-lg shadow-lg"
-        : "bg-white rounded-lg shadow-lg max-w-lg w-full"
-    }`}
-  >
-    {/* Admin Content Starts Here */}
-
+      className="fixed inset-0 bg-black bg-opacity-30 z-50 flex items-center justify-center p-4"
+      style={{ backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)' }}                                                                                                                            
+    >
+      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-6xl h-[90vh] overflow-hidden">
         {/* Header */}
         <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6">
           <div className="flex justify-between items-center">
@@ -487,7 +473,7 @@ const Admin = ({ isOpen, onClose, isPage = true }) => {
                   <input
                     type="email"
                     value={loginCredentials.email}
-                    onChange={(e) => setLoginCredentials({ ...loginCredentials, email: e.target.value })}
+                    onChange={(e) => setLoginCredentials({...loginCredentials, email: e.target.value})}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="admin@pridespan.com"
                     required
@@ -500,7 +486,7 @@ const Admin = ({ isOpen, onClose, isPage = true }) => {
                   <input
                     type="password"
                     value={loginCredentials.password}
-                    onChange={(e) => setLoginCredentials({ ...loginCredentials, password: e.target.value })}
+                    onChange={(e) => setLoginCredentials({...loginCredentials, password: e.target.value})}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="Enter your password"
                     required
@@ -536,10 +522,11 @@ const Admin = ({ isOpen, onClose, isPage = true }) => {
                           setActiveTab(tab.id)
                           setSidebarOpen(false) // Close sidebar on mobile after selection
                         }}
-                        className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${activeTab === tab.id
+                        className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${
+                          activeTab === tab.id
                             ? 'bg-blue-600 text-white'
                             : 'text-gray-700 hover:bg-gray-200'
-                          }`}
+                        }`}
                       >
                         <span className="mr-3">{tab.icon}</span>
                         {tab.name}
@@ -572,7 +559,7 @@ const Admin = ({ isOpen, onClose, isPage = true }) => {
                 {activeTab === 'dashboard' && (
                   <div className="space-y-6">
                     <h2 className="text-2xl font-bold text-gray-900">Dashboard Overview</h2>
-
+                    
                     {/* Stats Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                       {stats.map((stat, index) => (
@@ -600,16 +587,17 @@ const Admin = ({ isOpen, onClose, isPage = true }) => {
                               <p className="text-sm text-gray-600">{project.client_name || project.client} • {project.budget}</p>
                             </div>
                             <div className="text-right">
-                              <span className={`px-2 py-1 rounded-full text-xs font-medium ${project.status === 'Completed' ? 'bg-green-100 text-green-800' :
-                                  project.status === 'In Progress' ? 'bg-blue-100 text-blue-800' :
-                                    'bg-yellow-100 text-yellow-800'
-                                }`}>
+                              <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                                project.status === 'Completed' ? 'bg-green-100 text-green-800' :
+                                project.status === 'In Progress' ? 'bg-blue-100 text-blue-800' :
+                                'bg-yellow-100 text-yellow-800'
+                              }`}>
                                 {project.status}
                               </span>
                               <div className="mt-2">
                                 <div className="w-24 bg-gray-200 rounded-full h-2">
-                                  <div
-                                    className="bg-blue-600 h-2 rounded-full"
+                                  <div 
+                                    className="bg-blue-600 h-2 rounded-full" 
                                     style={{ width: `${project.progress}%` }}
                                   ></div>
                                 </div>
@@ -645,7 +633,7 @@ const Admin = ({ isOpen, onClose, isPage = true }) => {
                         </button>
                       </div>
                     </div>
-
+                    
                     {/* Add Project Modal */}
                     {showAddProject && (
                       <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
@@ -658,7 +646,7 @@ const Admin = ({ isOpen, onClose, isPage = true }) => {
                                 <input
                                   type="text"
                                   value={newProject.name}
-                                  onChange={(e) => setNewProject({ ...newProject, name: e.target.value })}
+                                  onChange={(e) => setNewProject({...newProject, name: e.target.value})}
                                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                                   required
                                 />
@@ -668,7 +656,7 @@ const Admin = ({ isOpen, onClose, isPage = true }) => {
                                 <input
                                   type="text"
                                   value={newProject.client}
-                                  onChange={(e) => setNewProject({ ...newProject, client: e.target.value })}
+                                  onChange={(e) => setNewProject({...newProject, client: e.target.value})}
                                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                                   required
                                 />
@@ -677,7 +665,7 @@ const Admin = ({ isOpen, onClose, isPage = true }) => {
                                 <label className="block text-sm font-medium text-gray-700 mb-2">Status</label>
                                 <select
                                   value={newProject.status}
-                                  onChange={(e) => setNewProject({ ...newProject, status: e.target.value })}
+                                  onChange={(e) => setNewProject({...newProject, status: e.target.value})}
                                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                                 >
                                   <option value="Planning">Planning</option>
@@ -692,7 +680,7 @@ const Admin = ({ isOpen, onClose, isPage = true }) => {
                                   min="0"
                                   max="100"
                                   value={newProject.progress}
-                                  onChange={(e) => setNewProject({ ...newProject, progress: e.target.value })}
+                                  onChange={(e) => setNewProject({...newProject, progress: e.target.value})}
                                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                                 />
                               </div>
@@ -701,7 +689,7 @@ const Admin = ({ isOpen, onClose, isPage = true }) => {
                                 <input
                                   type="text"
                                   value={newProject.budget}
-                                  onChange={(e) => setNewProject({ ...newProject, budget: e.target.value })}
+                                  onChange={(e) => setNewProject({...newProject, budget: e.target.value})}
                                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                                   placeholder="₹0"
                                 />
@@ -711,7 +699,7 @@ const Admin = ({ isOpen, onClose, isPage = true }) => {
                                 <input
                                   type="date"
                                   value={newProject.startDate}
-                                  onChange={(e) => setNewProject({ ...newProject, startDate: e.target.value })}
+                                  onChange={(e) => setNewProject({...newProject, startDate: e.target.value})}
                                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                                 />
                               </div>
@@ -748,7 +736,7 @@ const Admin = ({ isOpen, onClose, isPage = true }) => {
                                 <input
                                   type="text"
                                   value={editingProject.name || ''}
-                                  onChange={(e) => setEditingProject({ ...editingProject, name: e.target.value })}
+                                  onChange={(e) => setEditingProject({...editingProject, name: e.target.value})}
                                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                                   required
                                 />
@@ -758,7 +746,7 @@ const Admin = ({ isOpen, onClose, isPage = true }) => {
                                 <input
                                   type="text"
                                   value={editingProject.client || ''}
-                                  onChange={(e) => setEditingProject({ ...editingProject, client: e.target.value })}
+                                  onChange={(e) => setEditingProject({...editingProject, client: e.target.value})}
                                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                                   required
                                 />
@@ -767,7 +755,7 @@ const Admin = ({ isOpen, onClose, isPage = true }) => {
                                 <label className="block text-sm font-medium text-gray-700 mb-2">Status</label>
                                 <select
                                   value={editingProject.status}
-                                  onChange={(e) => setEditingProject({ ...editingProject, status: e.target.value })}
+                                  onChange={(e) => setEditingProject({...editingProject, status: e.target.value})}
                                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                                 >
                                   <option value="Planning">Planning</option>
@@ -782,7 +770,7 @@ const Admin = ({ isOpen, onClose, isPage = true }) => {
                                   min="0"
                                   max="100"
                                   value={editingProject.progress}
-                                  onChange={(e) => setEditingProject({ ...editingProject, progress: e.target.value })}
+                                  onChange={(e) => setEditingProject({...editingProject, progress: e.target.value})}
                                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                                 />
                               </div>
@@ -827,18 +815,19 @@ const Admin = ({ isOpen, onClose, isPage = true }) => {
                                 <td className="py-3 px-4 font-medium">{project.project_name || project.name}</td>
                                 <td className="py-3 px-4">{project.client_name || project.client}</td>
                                 <td className="py-3 px-4">
-                                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${project.status === 'Completed' ? 'bg-green-100 text-green-800' :
-                                      project.status === 'In Progress' ? 'bg-blue-100 text-blue-800' :
-                                        'bg-yellow-100 text-yellow-800'
-                                    }`}>
+                                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                                    project.status === 'Completed' ? 'bg-green-100 text-green-800' :
+                                    project.status === 'In Progress' ? 'bg-blue-100 text-blue-800' :
+                                    'bg-yellow-100 text-yellow-800'
+                                  }`}>
                                     {project.status}
                                   </span>
                                 </td>
                                 <td className="py-3 px-4">
                                   <div className="flex items-center">
                                     <div className="w-16 bg-gray-200 rounded-full h-2 mr-2">
-                                      <div
-                                        className="bg-blue-600 h-2 rounded-full"
+                                      <div 
+                                        className="bg-blue-600 h-2 rounded-full" 
                                         style={{ width: `${project.progress}%` }}
                                       ></div>
                                     </div>
@@ -847,13 +836,13 @@ const Admin = ({ isOpen, onClose, isPage = true }) => {
                                 </td>
                                 <td className="py-3 px-4">{project.budget}</td>
                                 <td className="py-3 px-4">
-                                  <button
+                                  <button 
                                     onClick={() => setEditingProject(project)}
                                     className="text-blue-600 hover:text-blue-800 mr-2 text-sm"
                                   >
                                     Edit
                                   </button>
-                                  <button
+                                  <button 
                                     onClick={() => deleteProject(project.id)}
                                     className="text-red-600 hover:text-red-800 text-sm"
                                   >
@@ -903,14 +892,14 @@ const Admin = ({ isOpen, onClose, isPage = true }) => {
                               <div className="flex space-x-2">
                                 <button className="text-blue-600 hover:text-blue-800 text-sm">Reply</button>
                                 {submission.status === 'unread' && (
-                                  <button
+                                  <button 
                                     onClick={() => markContactAsRead(submission.id)}
                                     className="text-green-600 hover:text-green-800 text-sm"
                                   >
                                     Mark as Read
                                   </button>
                                 )}
-                                <button
+                                <button 
                                   onClick={() => deleteContactSubmission(submission.id)}
                                   className="text-red-600 hover:text-red-800 text-sm"
                                 >
@@ -965,14 +954,14 @@ const Admin = ({ isOpen, onClose, isPage = true }) => {
                               <div className="flex space-x-2">
                                 <button className="text-blue-600 hover:text-blue-800 text-sm">Reply</button>
                                 {submission.status === 'unread' && (
-                                  <button
+                                  <button 
                                     onClick={() => markServiceAsRead(submission.id)}
                                     className="text-green-600 hover:text-green-800 text-sm"
                                   >
                                     Mark as Read
                                   </button>
                                 )}
-                                <button
+                                <button 
                                   onClick={() => deleteServiceSubmission(submission.id)}
                                   className="text-red-600 hover:text-red-800 text-sm"
                                 >
@@ -1020,7 +1009,7 @@ const Admin = ({ isOpen, onClose, isPage = true }) => {
                           </div>
                         </div>
                         <div className="pt-4 border-t border-gray-200">
-                          <button
+                          <button 
                             onClick={handleLogout}
                             className="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition-colors"
                           >
