@@ -1,4 +1,5 @@
 import React from 'react'
+// import modelimg from '../assets/modelimg'
 
 const Hero = () => {
   return (
@@ -20,9 +21,7 @@ const Hero = () => {
                 <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Living Space</span>
               </h1>
               <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                Create stunning interiors that reflect your personality and lifestyle. 
-                Our expert designers bring your vision to life with innovative solutions 
-                and meticulous attention to detail.
+                Thoughtfull design that blends your style,comfort and value - Our designers briging every vision to life with care and creativity .
               </p>
             </div>
 
@@ -38,7 +37,7 @@ const Hero = () => {
             {/* Stats */}
             <div className="grid grid-cols-3 gap-4 sm:gap-8 pt-8">
               <div className="text-center">
-                <div className="text-2xl sm:text-3xl font-bold text-blue-600">500+</div>
+                <div className="text-2xl sm:text-3xl font-bold text-blue-600">50+</div>
                 <div className="text-sm sm:text-base text-gray-600">Projects Completed</div>
               </div>
               <div className="text-center">
@@ -46,7 +45,7 @@ const Hero = () => {
                 <div className="text-sm sm:text-base text-gray-600">Client Satisfaction</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl sm:text-3xl font-bold text-blue-600">10+</div>
+                <div className="text-2xl sm:text-3xl font-bold text-blue-600">5+</div>
                 <div className="text-sm sm:text-base text-gray-600">Years Experience</div>
               </div>
             </div>
@@ -56,8 +55,8 @@ const Hero = () => {
           <div className="relative hidden lg:block">
             <div className="relative z-10">
               <div className="bg-white rounded-3xl shadow-2xl p-8 transform rotate-3 hover:rotate-0 transition-transform duration-500">
-                <div className="aspect-w-4 aspect-h-3 bg-gradient-to-br from-blue-100 to-purple-100 rounded-2xl flex items-center justify-center">
-                  <div className="text-center space-y-4">
+                <div className="aspect-w-4 aspect-h-3 bg-gradient-to-br from-blue-100 to-purple-100 rounded-2xl flex items-center justify-center ">
+                  <div className="text-center space-y-4" >
                     <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center mx-auto">
                       <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />

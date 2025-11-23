@@ -228,8 +228,8 @@ const Contact = () => {
                     <div>
                       <h4 className="font-medium text-lg">Address</h4>
                       <p className="text-gray-600">
-                        822, Tower B4, Spazetech Park,<br />
-                        Sec 49, Gurgaon
+                        1201, T-A Ramprastha The View<br />
+                        Sec 37D, Gurgaon- 122001
                       </p>
                     </div>
                   </div>
@@ -241,7 +241,8 @@ const Contact = () => {
                     </div>
                     <div>
                       <h4 className="font-medium text-lg">Phone</h4>
-                      <p className="text-gray-600">+91 95400-97775</p>
+                      <p className="text-gray-600">+91 9810608668</p>
+                      <p className="text-gray-600">+91 9540367778</p>
                     </div>
                   </div>
 
