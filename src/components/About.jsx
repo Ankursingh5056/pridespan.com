@@ -9,17 +9,17 @@ const teamMembers = [
     description: "9+ years designing residential and commercial spaces."
   },
   {
-    name: "Manisha Gaur Arora",
+    name: "Manisha Gaur",
     role: "CEO",
     image: "/Manisha.jpeg",
     description: "Specialist in modern and contemporary design."
   },
   {
     name: "A.k arora",
-    role: "Lighting Specialist",
+    role: "Project lead",
     image:
       "/A.R.arora.jpeg", 
-    description: "Creates ambient and functional lighting solutions."
+    description: "Leads projects from concept to completion with clarity and precision."
   }
 ];
 const sliderImages = [
