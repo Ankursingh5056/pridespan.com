@@ -7,40 +7,47 @@ const Services = () => {
 
   const services = [
     {
-      image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80",
-      title: "Residential Design",
-      description: "Transform your home into a beautiful, functional space that reflects your lifestyle and personality.",
-      features: ["Space Planning", "Color Consultation", "Furniture Selection", "Lighting Design"]
+      image: "Services3.png",
+      title: "End-to-End Home Interior Services",
+      description: "Transform your home with our complete residential interior solutions —from smart planning to flawless execution. We handle everything end-to-end.",
+      features: ["Space Planning & Design", "Full Civil & Plumbing Work", "Custom Furniture & False Ceiling", "Lighting, Electricals & Finish Work"]
     },
     {
-      image: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80",
-      title: "Commercial Design",
-      description: "Create inspiring work environments that boost productivity and impress clients and employees.",
-      features: ["Office Design", "Retail Spaces", "Restaurant Design", "Brand Integration"]
+      image: "/Service1.png",
+      title: "3D Visualization & Rendering",
+      description: "Bring your ideas to life with photorealistic 3D renders that help you visualize every detail before execution",
+      features: ["High-Quality 3D Interior Rendering", "Material, Color & Lighting Simulation", "Exterior & Architectural Visualization","Walkthroughs & Concept Presentations"]
     },
     {
-      image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80",
-      title: "Renovation & Remodeling",
-      description: "Breathe new life into existing spaces with our comprehensive renovation and remodeling services.",
-      features: ["Kitchen Remodeling", "Bathroom Design", "Basement Finishing", "Whole House Renovation"]
+      image: "/Services2.png",
+      title: "Commercial Interior Solutions",
+      description: "Designing high-performance commercial spaces that elevate your brand and create seamless experiences for customers and teams.",
+      features: ["Space Planning & Layout Optimization", "Civil Work, Electrical & Plumbing Execution", "Custom Furniture, Partitions & Storage Systemsn", "Lighting Design & Complete Site Management"]
+    },
+    // {
+    //   image: "/Services3.png",
+    //   title: "Renovation & Remodeling",
+    //   description: "Breathe new life into existing spaces with our comprehensive renovation and remodeling services.",
+    //   features: ["Kitchen Remodeling", "Bathroom Design", "Basement Finishing", "Whole House Renovation"]
+    // },
+    
+    {
+      image: "Service4.png",
+      title: "Movers & Packers",
+      description: "Make your move stress-free with safe, organized shifting services designed to handle your belongings with care and precision.",
+      features: ["Home & Office Relocation" ,"Professional Packing & Unpacking", "Loading, Transport & Delivery",  "Furniture Dismantling & Reassembly"]
     },
     {
-      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80",
-      title: "Lighting Design",
-      description: "Illuminate your space with strategic lighting that enhances ambiance and functionality.",
-      features: ["Ambient Lighting", "Task Lighting", "Accent Lighting", "Smart Home Integration"]
+      image: "Service5.png",
+      title: "Home Loan Services",
+      description: "Get expert guidance to secure the right home loan with smooth processing, quick approvals, and trusted support.",
+      features: ["Home Loan Consultation & Eligibility Check", "Assistance with Documentation & Filing", "Comparison of Bank Offers & Interest Rates", "End-to-End Support Until Loan Disbursement"]
     },
     {
-      image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80",
-      title: "Furniture & Decor",
-      description: "Curate the perfect furniture and decor pieces to complete your interior design vision.",
-      features: ["Custom Furniture", "Art Selection", "Accessories", "Window Treatments"]
-    },
-    {
-      image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80",
-      title: "Design Consultation",
-      description: "Get expert advice and guidance to make informed decisions about your interior design project.",
-      features: ["Initial Consultation", "Design Review", "Project Management", "Ongoing Support"]
+      image: "Services6.png",
+      title: "Vastu Consultation",
+      description: "Create balanced, harmonious spaces with Vastu-guided design that enhances positivity, well-being, and overall flow in your home.",
+      features: ["Home & Site Vastu Analysis", "Layout & Room Placement Guidance", "Remedies Without Structural Changes", "Vastu for New Construction & Renovation"]
     }
   ]
 
