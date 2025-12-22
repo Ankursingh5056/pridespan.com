@@ -17,42 +17,42 @@ const Portfolio = () => {
       title: "Modern Living Room",
       category: "residential",
       description: "Contemporary design with natural elements and minimalist furniture",
-      image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+      image :"./public/Portfolio1.png"
     },
     {
       id: 2,
       title: "Executive Office Space",
       category: "commercial",
       description: "Professional workspace designed for productivity and collaboration",
-      image: "https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+     image :"public/portfoilio2.png"
     },
     {
       id: 3,
       title: "Kitchen Renovation",
       category: "renovation",
       description: "Complete kitchen transformation with modern appliances and open concept",
-      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+      image:"public/portfolio3.png"
     },
     {
       id: 4,
       title: "Ambient Bedroom",
       category: "lighting",
       description: "Cozy bedroom with strategic lighting for relaxation and comfort",
-      image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+      image: "public/portfolio4.png"
     },
     {
       id: 5,
       title: "Luxury Penthouse",
       category: "residential",
       description: "High-end residential design with premium materials and finishes",
-      image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+      image : "public/portfolio5.png"
     },
     {
       id: 6,
       title: "Retail Store Design",
       category: "commercial",
       description: "Modern retail space designed to enhance customer experience",
-      image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+      image :"public/portoilio6.png"
     }
   ]
 
