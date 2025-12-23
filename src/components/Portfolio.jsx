@@ -17,42 +17,42 @@ const Portfolio = () => {
       title: "Modern Living Room",
       category: "residential",
       description: "Contemporary design with natural elements and minimalist furniture",
-      image :"./public/Portfolio1.png"
+      image :"/Portfolio1.png"
     },
     {
       id: 2,
       title: "Executive Office Space",
       category: "commercial",
       description: "Professional workspace designed for productivity and collaboration",
-     image :"public/portfoilio2.png"
+     image :"/portfoilio2.png"
     },
     {
       id: 3,
       title: "Kitchen Renovation",
       category: "renovation",
       description: "Complete kitchen transformation with modern appliances and open concept",
-      image:"public/portfolio3.png"
+      image:"/portfolio3.png"
     },
     {
       id: 4,
       title: "Ambient Bedroom",
       category: "lighting",
       description: "Cozy bedroom with strategic lighting for relaxation and comfort",
-      image: "public/portfolio4.png"
+      image: "/portfolio4.png"
     },
     {
       id: 5,
       title: "Luxury Penthouse",
       category: "residential",
       description: "High-end residential design with premium materials and finishes",
-      image : "public/portfolio5.png"
+      image : "/portfolio5.png"
     },
     {
       id: 6,
       title: "Retail Store Design",
       category: "commercial",
       description: "Modern retail space designed to enhance customer experience",
-      image :"public/portoilio6.png"
+      image :"/portoilio6.png"
     }
   ]
 
