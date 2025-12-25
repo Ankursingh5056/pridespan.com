@@ -16,49 +16,48 @@ const Portfolio = () => {
       id: 1,
       title: "Modern Living Room",
       category: "residential",
-      description: "Minimal yet refined interiors designed to maximize space, light, and effortless living.",
-      image: "/Portfolio1.png"
+      description: "Contemporary design with natural elements and minimalist furniture",
+      image :"/Portfolio1.png"
     },
     {
       id: 2,
       title: "Executive Office Space",
       category: "commercial",
       description: "Professional workspace designed for productivity and collaboration",
-      image: "/portfoilio2.png"
+     image :"/portfoilio2.png"
     },
     {
       id: 3,
       title: "Kitchen Renovation",
       category: "renovation",
       description: "Complete kitchen transformation with modern appliances and open concept",
-      image: "/portfolio3.png"
+      image:"/portfolio3.png"
     },
     {
       id: 4,
       title: "Ambient Bedroom",
       category: "lighting",
       description: "Cozy bedroom with strategic lighting for relaxation and comfort",
-      image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-
+      image: "/portfolio4.png"
     },
     {
       id: 5,
       title: "Luxury Penthouse",
       category: "residential",
-      description: "An affordable flat design focused on smart space planning, functional interiors, and a comfortable modern lifestyle.",
-      image: "/portfoilio2.png"
+      description: "High-end residential design with premium materials and finishes",
+      image : "/portfolio5.png"
     },
     {
       id: 6,
       title: "Retail Store Design",
       category: "commercial",
-      description: "Smart, stylish studio designs crafted to spark creativity and flow.",
-      image: "/portoilio6.png"
+      description: "Modern retail space designed to enhance customer experience",
+      image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
     }
   ]
 
-  const filteredProjects = activeCategory === 'all'
-    ? projects
+  const filteredProjects = activeCategory === 'all' 
+    ? projects 
     : projects.filter(project => project.category === activeCategory)
 
   return (
@@ -79,10 +78,11 @@ const Portfolio = () => {
             <button
               key={category.id}
               onClick={() => setActiveCategory(category.id)}
-              className={`px-6 py-3 rounded-lg font-medium transition-all duration-300 ${activeCategory === category.id
+              className={`px-6 py-3 rounded-lg font-medium transition-all duration-300 ${
+                activeCategory === category.id
                   ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg'
                   : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
-                }`}
+              }`}
             >
               {category.name}
             </button>
