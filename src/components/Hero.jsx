@@ -44,7 +44,10 @@ const Hero = () => {
                   Start Your Project
                 </button>
 
-                <button className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105">
+                <button
+                  onClick={() => window.location.hash = "portfolio"}
+                  className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105"
+                >
                   View Portfolio
                 </button>
               </div>
