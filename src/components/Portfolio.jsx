@@ -31,7 +31,7 @@ const Portfolio = () => {
       title: "Kitchen Renovation",
       category: "renovation",
       description: "Complete kitchen transformation with modern appliances and open concept",
-      image:"/portfolio3.png"
+      image:"/kitchen.jpg"
     },
     {
       id: 4,
