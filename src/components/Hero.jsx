@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Helmet } from "react-helmet";
 import modernRoom from "../assets/modelimg.png";
 
 const Hero = () => {

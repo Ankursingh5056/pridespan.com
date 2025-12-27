@@ -4,6 +4,7 @@ import ClientInformation from './ClientInformation'
 const Services = () => {
   const [isClientModalOpen, setIsClientModalOpen] = useState(false)
   const [selectedService, setSelectedService] = useState('')
+  const [showAllServices, setShowAllServices] = useState(false)
 
   const services = [
     {
@@ -24,13 +25,6 @@ const Services = () => {
       description: "Designing high-performance commercial spaces that elevate your brand and create seamless experiences for customers and teams.",
       features: ["Space Planning & Layout Optimization", "Civil Work, Electrical & Plumbing Execution", "Custom Furniture, Partitions & Storage Systemsn", "Lighting Design & Complete Site Management"]
     },
-    // {
-    //   image: "/Services3.png",
-    //   title: "Renovation & Remodeling",
-    //   description: "Breathe new life into existing spaces with our comprehensive renovation and remodeling services.",
-    //   features: ["Kitchen Remodeling", "Bathroom Design", "Basement Finishing", "Whole House Renovation"]
-    // },
-    
     {
       image: "Service4.png",
       title: "Movers & Packers",
@@ -61,6 +55,8 @@ const Services = () => {
     setSelectedService('')
   }
 
+  const visibleServices = showAllServices ? services : services.slice(0, 3)
+
   return (
     <>
       <section id="services" className="py-20 bg-white">
@@ -75,7 +71,7 @@ const Services = () => {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => (
+            {visibleServices.map((service, index) => (
               <div 
                 key={index} 
                 className="bg-gray-50 rounded-2xl p-8 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-2 cursor-pointer group"
@@ -88,15 +84,15 @@ const Services = () => {
                     className="w-full h-full object-cover rounded-xl group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
-                
+
                 <h3 className="text-xl font-semibold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors duration-200">
                   {service.title}
                 </h3>
-                
+
                 <p className="text-gray-600 mb-6 leading-relaxed">
                   {service.description}
                 </p>
-                
+
                 <ul className="space-y-2">
                   {service.features.map((feature, featureIndex) => (
                     <li key={featureIndex} className="flex items-center text-sm text-gray-600">
@@ -108,7 +104,6 @@ const Services = () => {
                   ))}
                 </ul>
 
-                {/* Click indicator */}
                 <div className="mt-6 flex items-center text-blue-600 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                   <span>Click to get started</span>
                   <svg className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -120,14 +115,16 @@ const Services = () => {
           </div>
 
           <div className="text-center mt-16">
-            <button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+            <button
+              onClick={() => setShowAllServices(true)}
+              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+            >
               View All Services
             </button>
           </div>
         </div>
       </section>
 
-      {/* Client Information Modal */}
       <ClientInformation
         isOpen={isClientModalOpen}
         onClose={handleCloseModal}
