@@ -46,7 +46,7 @@ const Portfolio = () => {
       category: "residential",
       description: "Minimal yet refined interiors designed to maximize space, light, and effortless living",
       image: "/Portfolio1.png",
-      video: "/video.mp4"
+      video: "/video1.mp4"
     },
     {
       id: 2,
@@ -54,7 +54,7 @@ const Portfolio = () => {
       category: "residential",
       description: "An affordable flat design focused on smart space planning, functional interiors, and a comfortable modern lifestyle.",
       image: "/portfoilio2.png",
-      video: "/video.mp4"
+      video: "/video2.mp4"
     },
     {
       id: 3,
@@ -62,7 +62,7 @@ const Portfolio = () => {
       category: "residential",
       description: "An elegant space crafted with modern materials, efficient zoning, and subtle luxury details.",
       image: "/portfolio3.png",
-      video: "/video.mp4"
+      video: "/video3.mp4"
     },
     {
       id: 4,
@@ -70,7 +70,7 @@ const Portfolio = () => {
       category: "residential",
       description: "An elegant space crafted with modern materials, efficient zoning, and subtle luxury details.A",
       image: "/portfolio4.png",
-      video: "/video.mp4"
+      video: "/video4.mp4"
     },
     {
       id: 5,
@@ -78,7 +78,7 @@ const Portfolio = () => {
       category: "commercial",
       description: "Smart, stylish studio designs crafted to spark creativity and flow.",
       image: "/portfolio5.png",
-      video: "/videos.mp4"
+      video: "/video5.mp4"
     },
     {
       id: 6,
@@ -86,7 +86,7 @@ const Portfolio = () => {
       category: "commercial",
       description: "Professional workspace designed for productivity and collaboration",
       image: "/portoilio6.png",
-      video: "/videos/project6.mp4"
+      video: "/video6.mp4"
     }
   ]
 
@@ -200,7 +200,7 @@ const Portfolio = () => {
               src={activeVideo}
               controls
               autoPlay
-              className="w-full h-[420px] object-cover rounded-t-xl"
+              className="w-full h-[420px] lg:h-[500px] object-cover rounded-t-xl"
             />
 
             {activeProject && (
